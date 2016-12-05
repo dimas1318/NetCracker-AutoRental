@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">   
+    <f:view>    
+        <h:head>
+            <title>Facelet Title</title>
+        </h:head>
+        <h:body> 
+            <ui:insert>
+                <ui:include src="index.xhtml" />
+            </ui:insert>
+            <h:form id="emp_form">                   
+                <h:messages showDetail="true"></h:messages>
+                <table>
+                    <tr>
+                        <td>|   Car ID</td>
+                        <td>|   Company ID</td>
+                        <td>|   Brand</td>  
+                        <td>|   Name</td> 
+                        <td>|   Color</td> 
+                        <td>|   Photo</td> 
+                        <td>|   Price</td>  
+                        <td>|</td>
+                    </tr>                    
+                    <ui:repeat value="#{carBean.cars}" var="car">
+                        <tr>
+                            <td>| #{car.carId}</td>
+                            <td>| #{car.companyId}</td>
+                            <td>| #{car.brand}</td>
+                            <td>| #{car.name}</td>
+                            <td>| #{car.color}</td>
+                            <td>| #{car.photo}</td>
+                            <td>| #{car.price}</td>
+                            <td>|
+                                <h:commandButton id="hello" value="Delete" actionListener="#{carBean.deleteCar(car.carId)}"/>
+                            </td>
+                            <td>|</td>
+                        </tr>
+                    </ui:repeat>                    
+                </table>
+            </h:form>              
+            <h:form id="create_form">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    Car ID: <h:inputText value="#{carEditBean.carId}"/>
+                    Company ID: <h:inputText value="#{carEditBean.companyId}"/>
+                    Brand: <h:inputText value="#{carEditBean.brand}"/>
+                    Name: <h:inputText value="#{carEditBean.name}"/>
+                    Color: <h:inputText value="#{carEditBean.color}"/>
+                    Photo: <h:inputText value="#{carEditBean.photo}"/>
+                    Price: <h:inputText value="#{carEditBean.price}"/>
+                </h:panelGrid>
+                <h:commandButton value="Create" actionListener="#{carBean.createCar(carEditBean)}"/>   
+            </h:form> 
+        </h:body>
+    </f:view>
+</html>

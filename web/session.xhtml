@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view>
+        <h:head>
+            <title>Facelet Title</title>
+        </h:head>
+        <h:body>
+            <ui:insert>
+                <ui:include src="index.xhtml" />
+            </ui:insert>
+            <br/>
+            <h:form id="emp_form">      
+                <h:messages showDetail="true"></h:messages>
+                <table>
+                    <tr>
+                        <td>|   Session ID</td> 
+                        <td>|   Car ID</td> 
+                        <td>|   Start Date</td> 
+                        <td>|   End Date</td>
+                        <td>|   Driver ID</td>
+                        <td>|   Customer ID</td>
+                        <td>|</td>
+                    </tr>                    
+                    <ui:repeat value="#{sessionBean.sessions}" var="ses">
+                        <tr>
+                            <td>| #{ses.sessionId}</td>
+                            <td>| #{ses.carId}</td>
+                            <td>| #{ses.startDate}</td>
+                            <td>| #{ses.endDate}</td>
+                            <td>| #{ses.driverId}</td>
+                            <td>| #{ses.customerId}</td>
+                            <td>|
+                                <h:commandButton id="hello" value="Delete" actionListener="#{sessionBean.deleteSession(ses.sessionId)}"/>
+                            </td>
+                            <td>|</td>
+                        </tr>
+                    </ui:repeat>                    
+                </table>
+            </h:form>              
+            <h:form id="create_form">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    Session ID: <h:inputText value="#{sessionEditBean.sessionId}"/>
+                    Car ID: <h:inputText value="#{sessionEditBean.carId}"/>
+                    Start Date: <h:inputText value="#{sessionEditBean.startDate}"/>
+                    End Date: <h:inputText value="#{sessionEditBean.endDate}"/>
+                    Driver ID: <h:inputText value="#{sessionEditBean.driverId}"/>
+                    Customer ID: <h:inputText value="#{sessionEditBean.customerId}"/>
+                </h:panelGrid>
+                <h:commandButton value="Create" actionListener="#{sessionBean.createSession(sessionEditBean)}"/>
+            </h:form> 
+        </h:body>
+    </f:view>
+</html>

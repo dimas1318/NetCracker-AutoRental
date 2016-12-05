@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view>
+        <h:head>
+            <title>Facelet Title</title>
+        </h:head>
+        <h:body>
+            <ui:insert>
+                <ui:include src="index.xhtml" />
+            </ui:insert>
+            <br/>
+            <h:form id="emp_form">      
+                <h:messages showDetail="true"></h:messages>
+                <table>
+                    <tr>
+                        <td>|   Driver ID</td> 
+                        <td>|   Company ID</td> 
+                        <td>|   First Name</td>
+                        <td>|   Last Name</td>
+                        <td>|   Driving Experience</td>
+                    </tr>                    
+                    <ui:repeat value="#{driverBean.drivers}" var="driver">
+                        <tr>
+                            <td>| #{driver.driverId}</td>
+                            <td>| #{driver.companyId}</td>
+                            <td>| #{driver.firstName}</td>
+                            <td>| #{driver.lastName}</td>
+                            <td>| #{driver.drivingExperience}</td>
+                            <td>|
+                                <h:commandButton id="hello" value="Delete" actionListener="#{driverBean.deleteDriver(driver.driverId)}"/>
+                            </td>
+                            <td>|</td>
+                        </tr>
+                    </ui:repeat>                    
+                </table>
+            </h:form>              
+            <h:form id="create_form">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    Driver ID: <h:inputText value="#{driverEditBean.driverId}"/>
+                    Company ID: <h:inputText value="#{driverEditBean.companyId}"/> 
+                    First Name: <h:inputText value="#{driverEditBean.firstName}"/>
+                    Last Name: <h:inputText value="#{driverEditBean.lastName}"/>
+                    Driving Experience: <h:inputText value="#{driverEditBean.drivingExperience}"/>
+                </h:panelGrid>
+                <h:commandButton value="Create" actionListener="#{driverBean.createDriver(driverEditBean)}"/>
+            </h:form> 
+        </h:body>
+    </f:view>
+</html>

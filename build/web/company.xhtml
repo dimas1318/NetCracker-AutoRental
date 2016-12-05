@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view>
+        <h:head>
+            <title>Facelet Title</title>
+        </h:head>
+        <h:body>
+            <ui:insert>
+                <ui:include src="index.xhtml" />
+            </ui:insert>
+            <br/>
+            <h:form id="emp_form">      
+                <h:messages showDetail="true"></h:messages>
+                <table>
+                    <tr>
+                        <td>|   Company ID</td> 
+                        <td>|   Name</td> 
+                        <td>|   Site</td> 
+                        <td>|   Phone</td>   
+                        <td>|</td>
+                    </tr>                    
+                    <ui:repeat value="#{companyBean.companies}" var="company">
+                        <tr>
+                            <td>| #{company.companyId}</td>
+                            <td>| #{company.name}</td>
+                            <td>| #{company.site}</td>
+                            <td>| #{company.phoneNumber}</td>
+                            <td>|
+                                <h:commandButton id="hello" value="Delete" actionListener="#{companyBean.deleteCompany(company.companyId)}"/>
+                            </td>
+                            <td>|</td>
+                        </tr>
+                    </ui:repeat>                    
+                </table>
+            </h:form>              
+            <h:form id="create_form">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    Company ID: <h:inputText value="#{companyEditBean.companyId}"/>
+                    Name: <h:inputText value="#{companyEditBean.name}"/>
+                    Site: <h:inputText value="#{companyEditBean.site}"/>
+                    Phone: <h:inputText value="#{companyEditBean.phoneNumber}"/>
+                </h:panelGrid>
+                <h:commandButton value="Create" actionListener="#{companyBean.createCompany(companyEditBean)}"/>
+            </h:form> 
+        </h:body>
+    </f:view>
+</html>

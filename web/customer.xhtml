@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view>
+        <h:head>
+            <title>Facelet Title</title>
+        </h:head>
+        <h:body>
+            <ui:insert>
+                <ui:include src="index.xhtml" />
+            </ui:insert>
+            <br/>
+            <h:form id="emp_form">      
+                <h:messages showDetail="true"></h:messages>
+                <table>
+                    <tr>
+                        <td>|   Customer ID</td> 
+                        <td>|   Login</td> 
+                        <td>|   Password</td> 
+                        <td>|   First Name</td>
+                        <td>|   Last Name</td>
+                        <td>|   Birth Date</td>
+                        <td>|   Phone</td>
+                        <td>|   Registration Date</td>  
+                        <td>|</td>
+                    </tr>                    
+                    <ui:repeat value="#{customerBean.customers}" var="buy">
+                        <tr>
+                            <td>| #{buy.customerId}</td>
+                            <td>| #{buy.login}</td>
+                            <td>| #{buy.password}</td>
+                            <td>| #{buy.firstName}</td>
+                            <td>| #{buy.lastName}</td>
+                            <td>| #{buy.birthDate}</td>
+                            <td>| #{buy.phoneNumber}</td>
+                            <td>| #{buy.registrationDate}</td>
+                            <td>|
+                                <h:commandButton id="hello" value="Delete" actionListener="#{customerBean.deleteCustomer(buy.customerId)}"/>
+                            </td>
+                            <td>|</td>
+                        </tr>
+                    </ui:repeat>                    
+                </table>
+            </h:form>             
+            <h:form id="create_form">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    Customer ID: <h:inputText value="#{customerEditBean.customerId}"/>
+                    Login: <h:inputText value="#{customerEditBean.login}"/> 
+                    Password: <h:inputText value="#{customerEditBean.password}"/> 
+                    First Name: <h:inputText value="#{customerEditBean.firstName}"/>
+                    Last Name: <h:inputText value="#{customerEditBean.lastName}"/>
+                    Birth Date: <h:inputText value="#{customerEditBean.birthDate}">
+                        <f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
+                    </h:inputText>
+                    Phone: <h:inputText value="#{customerEditBean.phoneNumber}"/>
+                    Registration Date: <h:inputText value="#{customerEditBean.registrationDate}">
+                        <f:convertDateTime pattern="MM dd hh:mm:ss yyyy" type="date"/>
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandButton value="Create" actionListener="#{customerBean.createCustomer(customerEditBean)}"/>
+            </h:form> 
+        </h:body>
+    </f:view>
+</html>
